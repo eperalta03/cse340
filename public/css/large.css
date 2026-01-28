@@ -20,8 +20,8 @@
         margin: 15px 20px;
     }
 
-    nav ul li{
-        margin: 0 5rem;
+    nav #nav-display li{
+        margin: 0 4rem;
         padding: 2px;
     }
 
@@ -74,5 +74,9 @@
     #reviews h2{
         
         font-size: 1.4rem;
+    }
+    
+    #item-display{
+        grid-template-columns: 1fr 1fr;
     }
 }

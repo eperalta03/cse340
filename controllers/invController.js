@@ -19,4 +19,35 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+invCont.buildByItemId = async function (req, res, next) {
+  try {
+    const item_id = req.params.itemId
+    const data = await invModel.getInventoryItemById(item_id)
+
+    if (!data) {
+      const err = new Error("Item not found")
+      err.status = 404
+      return next(err)
+    }
+
+    const item = await utilities.buildItemGrid(data)
+    const nav = await utilities.getNav()
+
+    res.render("./inventory/item", {
+      title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
+      nav,
+      item,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+invCont.throwError = async (req, res, next) => {
+  const err = new Error("Intentional Server Error")
+  err.status = 500
+  throw err
+}
+
+
 module.exports = invCont

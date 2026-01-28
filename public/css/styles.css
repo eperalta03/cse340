@@ -51,7 +51,7 @@ nav{
   padding: .8rem;
 }
 
-nav ul{
+nav #nav-display{
   display: flex;
   list-style-type: none;
   width: 100%;
@@ -63,17 +63,21 @@ nav ul{
   border-bottom: 3px solid #0d3b66;
 }
 
-nav ul li{
-  margin: 0 12px;
+nav #nav-display li{
+  margin: 0 5px;
   font-size: 1.2rem;
   cursor: pointer;
   font-family: 'Arial Narrow Bold', sans-serif;
-  color:#0d3b66;
   padding: 2px;
   
 }
 
-nav ul li:hover {
+nav #nav-display li a{
+  text-decoration: none;
+  color:#0d3b66;
+}
+
+nav #nav-display li a:hover {
   color: #faf0ca;
   background-color: #0d3b66;
   border-radius: 6px;
@@ -184,13 +188,16 @@ footer{
 /*--- INVENTORY-CLASSIFICATION ---*/
 h1{
   background-color: white;
+  padding: 10px;
+  margin: 0;
 }
 
 #inv-display{
   background-color: white;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
-  column-gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 250px));
+  padding: 15px;
+  column-gap: 3rem;
   justify-content: center;  
   align-content: center; 
   justify-items: center;     
@@ -198,27 +205,72 @@ h1{
 }
 
 #inv-display li{
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
+  overflow: hidden;
   text-align: center;
   width: 100%;
-  height: 260px;       
+  height: 300px;       
   overflow: hidden;
   border: 1px solid black;
   border-radius: 6px;
   margin: 10px;
 }
 
-#inv-display img{
-  width: 250px;
-  height: 150px;
-  object-fit: cover;     
-  display: block;
+#inv-display li a img {
+  width: 100%;       
+  height: 150px;      
+  display: block;    
+  object-fit: cover; 
 }
 
 .namePrice h2, .namePrice span{
-  font-family: 'Arial Narrow Bold', sans-serif;;
+  font-family: 'Arial Narrow Bold', sans-serif;
 }
 
 .namePrice h2 {
   padding: 15px;
+}
+
+hr{
+  border: none;       
+  height: 2px;        
+  background-color: #0d3b66;
+}
+
+/*--- INVENTORY-ITEM ---*/
+
+#item-display{
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;  
+  align-content: center; 
+  justify-items: center;     
+  align-items: stretch; 
+  padding-top: 20px;
+}
+
+#item-display img{
+  width: 90%;
+  margin-bottom: 15px;
+}
+
+#itemInfo{
+  font-family: 'Arial Narrow Bold', sans-serif;
+  margin: 20px;
+}
+
+#itemInfo h2{
+  margin-bottom: 15px;
+}
+
+#itemInfo p{
+  padding: 5px;
+}
+
+#error{
+  background-color: white;
+  margin-left: 15px;
 }

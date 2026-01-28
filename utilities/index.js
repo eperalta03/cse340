@@ -33,7 +33,7 @@ Util.buildClassificationGrid = async function(data){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+      grid +=  '<a href="../../inv/item/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
@@ -41,7 +41,7 @@ Util.buildClassificationGrid = async function(data){
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+      grid += '<a href="../../inv/item/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
       grid += '</h2>'
@@ -56,6 +56,32 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+/* **************************************
+* Build the item view HTML
+* ************************************ */
+Util.buildItemGrid = async function (data){ 
+  let itemGrid
+  if (data){
+    itemGrid = `
+      <section id="item-display">
+        <img src=${data.inv_image} alt="Image of ${data.inv_make} ${data.inv_model}" loading= "lazy">
+        <div id="itemInfo">
+          <h2><strong>${data.inv_make} ${data.inv_model} Details</strong></h2>
+          <p><strong>Year: </strong>${data.inv_year}</p>
+          <p><strong>Price: </strong>$${new Intl.NumberFormat('en-US').format(data.inv_price)}</p>
+          <p><strong>Description: </strong>${data.inv_description}</p>
+          <p><strong>Color: </strong>${data.inv_color}</p>
+          <p><strong>Miles: </strong>${new Intl.NumberFormat('en-US').format(data.inv_miles)}</</p>
+        </div>
+      </section>
+      `
+  } else { 
+    itemGrid = `<p class="notice">Sorry, no matching vehicles could be found.</p>`
+  }
+  return itemGrid
+}
+
 
 /* ****************************************
  * Middleware For Handling Errors
