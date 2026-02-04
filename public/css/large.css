@@ -79,4 +79,8 @@
     #item-display{
         grid-template-columns: 1fr 1fr;
     }
+
+    fieldset{
+        width: 60%;
+    }
 }
