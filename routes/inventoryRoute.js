@@ -15,11 +15,20 @@ router.get("/", utilities.handleErrors(invController.buildManagement));
 
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+
 router.post(
     "/add-classification", 
     classValidate.classificationRules(),
     classValidate.checkClassData,
     utilities.handleErrors(invController.addNewClassification)
+)
+
+router.post(
+    "/add-inventory",
+    classValidate.inventoryRules(),
+    classValidate.checkInventoryData,
+    utilities.handleErrors((invController.addNewVehicle))
 )
 
 router.get("/error", utilities.handleErrors(invController.throwError))

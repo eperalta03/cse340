@@ -71,6 +71,7 @@ invCont.buildAddClassification = async function (req, res, next) {
   })
 }
 
+
 invCont.addNewClassification = async function (req, res){
   const {classification_name} = req.body
   
@@ -97,11 +98,48 @@ invCont.addNewClassification = async function (req, res){
   }
 }
 
+invCont.buildAddInventory = async function (req, res, next) {
+  const nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+  res.render("./inventory/add-inventory", {
+    title: "Add New Vehicle",
+    nav,
+    errors: null,
+    classificationList,
+  })
+}
+
+invCont.addNewVehicle = async function (req, res, next) {
+  const {classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+  
+  const newVehicle = await invModel.insertInventory ( 
+    classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color 
+  )
+  
+  if (newVehicle) {
+    const nav = await utilities.getNav()
+    req.flash(
+      "notice",
+      `The ${inv_make} ${inv_model} was succesfully added to the inventory.`
+    )
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, something went wrong")
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+    })
+  }
+  
+}
+
 invCont.throwError = async (req, res, next) => {
   const err = new Error("Intentional Server Error")
   err.status = 500
   throw err
 }
-
 
 module.exports = invCont

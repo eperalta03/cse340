@@ -12,14 +12,11 @@
  </ul>
 <% } %>
 
-<div class="form">
-
-    <form id="add-class" action="/inv/add-classification" method="post">
-        <fieldset>
-            <label>Classification name</label>
-            <p>NAME MUST BE ALPHABETIC CHARACTERS ONLY</p>
-            <input type="text" name="classification_name" required pattern="[A-Za-z]+">
-            <input type="submit" value="Add Classification">
-        </fieldset>
-    </form>
-</div>
+<form id="add-class" action="/inv/add-classification" method="post">
+    <fieldset>
+        <label>Classification name</label>
+        <p>NAME MUST BE ALPHABETIC CHARACTERS ONLY</p>
+        <input type="text" name="classification_name" required pattern="[A-Za-z]+">
+        <input type="submit" value="Add Classification">
+    </fieldset>
+</form>

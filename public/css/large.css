@@ -81,7 +81,15 @@
         width: 60%;
     }
 
-    input[type= "email"], input[type="text"], input[type="password"]{
+    input[type= "email"], input[type="text"], input[type="password"], select{
         width: 50%;
+    }
+
+    textarea{
+        width: 65%;
+    }
+
+    input[type="number"]{
+        width: 30%;
     }
 }

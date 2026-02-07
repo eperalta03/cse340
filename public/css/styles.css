@@ -301,7 +301,7 @@ label{
   padding: 8px;
 }
 
-input[type= "email"], input[type="text"], input[type="password"]{
+input[type= "email"], input[type="text"], input[type="password"], input[type="number"], select, textarea{
   display: block;
   background-color: white;
   border: none;
@@ -325,7 +325,7 @@ input[type="submit"]{
   border-radius: 6px;
   cursor: pointer;
   border: none;
-  font-size: .8rem;
+  font-size: .9rem;
   width: 100px;
 }
 
