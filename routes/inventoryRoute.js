@@ -28,7 +28,7 @@ router.post(
     "/add-inventory",
     classValidate.inventoryRules(),
     classValidate.checkInventoryData,
-    utilities.handleErrors((invController.addNewVehicle))
+    utilities.handleErrors(invController.addNewVehicle)
 )
 
 router.get("/error", utilities.handleErrors(invController.throwError))

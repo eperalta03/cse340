@@ -310,6 +310,14 @@ input[type= "email"], input[type="text"], input[type="password"], input[type="nu
   width: 90%;
 }
 
+input[type="text"]:valid, input[type="email"]:valid, input[type="password"]:valid, input[type="number"]:valid, select:valid, textarea:valid{
+  border-left: #2dc48d 8px solid;
+}
+
+input[type="text"]:invalid, input[type="email"]:invalid, input[type="password"]:invalid, input[type="number"]:invalid, select:invalid, textarea:invalid{
+  border-left: #e84855 8px solid;
+}
+
 form a{
   color: white;
 }
