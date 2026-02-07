@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
 }
+
 #top-header{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -45,36 +46,37 @@
   background-color: white;
 }
 
-nav{
+nav {
   display: block;
   background-color: #faf0ca;
   padding: .8rem;
 }
 
-nav #nav-display{
-  display: flex;
+nav #nav-display {
+  display: grid;
   list-style-type: none;
   width: 100%;
-  text-align: center;
   padding: 2px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 5px;
+  text-align: center;
 }
 
-#current{
-  border-bottom: 3px solid #0d3b66;
-}
-
-nav #nav-display li{
-  margin: 0 5px;
+nav #nav-display li {
   font-size: 1.2rem;
   cursor: pointer;
   font-family: 'Arial Narrow Bold', sans-serif;
-  padding: 2px;
-  
+  padding: 6px 12px;
 }
 
-nav #nav-display li a{
+nav #nav-display li a {
   text-decoration: none;
-  color:#0d3b66;
+  color: #0d3b66;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 6px 12px;
+  text-align: center;
 }
 
 nav #nav-display li a:hover {
@@ -83,6 +85,7 @@ nav #nav-display li a:hover {
   border-radius: 6px;
   border-bottom: none;
 }
+
 
 /*--- BODY ---*/
 h1{
@@ -304,10 +307,15 @@ input[type= "email"], input[type="text"], input[type="password"]{
   border: none;
   border-radius: 6px;
   padding: .5rem;
+  width: 90%;
 }
 
 form a{
   color: white;
+}
+
+form span{
+  margin: 10px;
 }
 
 input[type="submit"]{
@@ -318,6 +326,20 @@ input[type="submit"]{
   cursor: pointer;
   border: none;
   font-size: .8rem;
+  width: 100px;
+}
+
+#add-class input[type= "text"], input[type="submit"]{
+  margin: 10px;
+}
+
+#add-class input[type="submit"]{
+  width: 150px;
+  font-size: .9rem;
+}
+
+#add-class p{
+  margin: 10px;
 }
 
 .notice{
@@ -328,4 +350,17 @@ input[type="submit"]{
 .notice li{
   margin-left: 15px;
   font-family: 'Arial Narrow Bold', sans-serif;
+}
+
+/*--- MANAGEMENT ---*/
+#management{
+  background-color: white;
+  list-style-type: none;
+  padding: 1rem 2rem;
+}
+
+#management li{
+  font-size: 1.2rem;
+  font-family: 'Arial Narrow Bold', sans-serif;
+  margin: 15px 0;
 }

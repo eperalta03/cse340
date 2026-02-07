@@ -20,10 +20,7 @@
         margin: 15px 20px;
     }
 
-    nav #nav-display li{
-        margin: 0 4rem;
-        padding: 2px;
-    }
+  
 
     #banner img{
         width: 70%;
@@ -82,5 +79,9 @@
 
     fieldset{
         width: 60%;
+    }
+
+    input[type= "email"], input[type="text"], input[type="password"]{
+        width: 50%;
     }
 }
