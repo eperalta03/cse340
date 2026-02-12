@@ -341,8 +341,8 @@ input[type="submit"]{
   margin: 10px;
 }
 
-#add-class input[type="submit"]{
-  width: 150px;
+#add-class input[type="submit"], #addInv [type="submit"]{
+  width: 200px;
   font-size: .9rem;
 }
 
@@ -371,4 +371,37 @@ input[type="submit"]{
   font-size: 1.2rem;
   font-family: 'Arial Narrow Bold', sans-serif;
   margin: 15px 0;
+}
+
+#accountM{
+  background-color: white;
+  
+}
+
+#manageInv{
+  background-color: white;
+  padding: 1rem 2rem;
+}
+
+#manageInv h2{
+  font-family: Verdana, sans-serif;
+  margin: 15px 0;
+}
+
+#manageInv p{
+   font-family: 'Arial Narrow Bold', sans-serif;
+   margin: 15px 0;
+}
+
+#inventoryDisplay{
+  font-family: 'Arial Narrow Bold', sans-serif;
+  margin: 15px 0;
+}
+
+td{
+  margin: 15px 0;
+}
+
+td a{
+  margin: 0 10px;
 }

@@ -31,7 +31,16 @@ router.post(
     utilities.handleErrors(invController.addNewVehicle)
 )
 
-router.get("/error", utilities.handleErrors(invController.throwError))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
+
+router.get("/edit/:inventory_id", utilities.handleErrors(invController.buildUpdateView))
+
+router.post("/update/",
+    classValidate.inventoryRules(),
+    classValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory))
+
+router.get("/error", utilities.handleErrors(invController.throwError))
 
 module.exports = router;
