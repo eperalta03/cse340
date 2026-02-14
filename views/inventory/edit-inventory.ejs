@@ -12,7 +12,7 @@
  </ul>
 <% } %>
 
-<form id="addInv" id="updateForm" action="/inv/update" method="post">
+<form id="updateForm" action="/inv/update" method="post">
     <fieldset>
         <label>
             Classification
@@ -22,7 +22,7 @@
         <label>Model <input type="text" name="inv_model" minlength="3" required value="<%= locals.inv_model %>" placeholder="Min of 3 characters"></label>
         <label>
             Description 
-            <textarea name="inv_description" rows="5" value="<%= locals.inv_description %>"></textarea>
+            <textarea name="inv_description" rows="5" required> <% if (locals.inv_description) { %> <%= locals.inv_description %> <% } %> </textarea>
         </label>
         <label>Image Path <input type="text" name="inv_image" required value="<%= locals.inv_image %>"></label>
         <label>Thumbnail Path <input type="text" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>"></label>
@@ -39,4 +39,4 @@
     </fieldset>
 </form>
 
-<script src="../../js/inventory.js"></script>
+<script src="/js/inv-update.js"></script>

@@ -334,7 +334,7 @@ input[type="submit"]{
   cursor: pointer;
   border: none;
   font-size: .9rem;
-  width: 100px;
+  width: 200px;
 }
 
 #add-class input[type= "text"], input[type="submit"]{
