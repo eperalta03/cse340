@@ -127,4 +127,115 @@ accountController.buildAccountManagement = async function (req, res, next) {
   })
 }
 
+accountController.buildUpdateAccount = async function (req, res, next) {
+  const accountId = parseInt(req.params.accountId)
+  
+  if (isNaN(accountId)) {
+    req.flash("notice", "Invalid account ID.")
+    return res.redirect("/account/")
+  }
+
+  if (accountId != res.locals.accountData.account_id) {
+    req.flash("notice", "You do not have permission to edit this account.")
+    return res.redirect("/account/")
+  }
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(accountId)
+  res.render("./account/update", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+    account_id: accountData.account_id,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+  })
+}
+
+/* ***************************
+ *  Update Account Info
+ * ************************** */
+accountController.updateAccountInfo = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+  } = req.body
+
+  const account_id = res.locals.accountData.account_id
+
+  const updateInfo = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email
+  )
+
+  if (updateInfo) {
+    const updatedAccount = await accountModel.getAccountById(account_id)
+    req.session.accountData = updatedAccount
+    const jwt = require("jsonwebtoken")
+    const accessToken = jwt.sign(
+      updatedAccount,
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "1h" }
+    )
+    res.cookie("jwt", accessToken, { httpOnly: true })
+    req.flash("notice", "Your information has been updated.")
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the information could not be updated.")
+    res.status(500).render("account/update", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email,
+    })
+  }
+}
+
+/* ***************************
+ *  Update Password
+ * ************************** */
+accountController.updatePassword = async function (req, res, next){
+  let nav = await utilities.getNav()
+  const {account_password} = req.body
+
+  let hashedPassword 
+  try {
+    hashedPassword = bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the password.')
+    return res.status(500).render("account/update", {
+      title: "Edit Account",
+      nav,
+      errors: null,
+    })
+  }
+
+  const account_id = res.locals.accountData.account_id
+  const updatedPassword = await accountModel.updatePassword(hashedPassword, account_id)
+
+  if (updatedPassword){
+    req.flash("notice", 'Your password has been succesfully updated.')
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the password could not be updated.")
+    res.status(500).render("account/update", {
+      title: "Edit Account", 
+      nav, 
+      errors: null,
+    })
+  }
+}
+
+accountController.logout = async function (req, res) {
+  res.clearCookie("jwt")
+  res.redirect("/")
+}
+
 module.exports = accountController

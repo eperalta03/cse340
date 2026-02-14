@@ -1,0 +1,42 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<form action="/account/update-account" method="post" class="update">
+    <label>First name: <input type="text" name="account_firstname" required value="<%= locals.account_firstname %>"></label>
+    <label>Last name: <input type="text" name="account_lastname" required value="<%= locals.account_lastname %>"></label>
+    <label>Email: <input type="email" name="account_email" required value="<%= locals.account_email %>"></label>
+    <label>
+        <input type="submit" value="Update Account">
+    </label>
+    <input type="hidden" name="account_id"
+    <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+    <% } %>>
+</form>
+
+<h3>Update Password</h3>
+<form action="/account/update-password" method="post" class="update">
+    <label>Password: <input type="password" name="account_password" id="pword" required minlength="12" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{12,}$"></label>
+    <div>
+        <span>There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character.</span>
+    </div>
+    <button type="button" id="pswdBtn">Show Password</button>
+    <label>
+        <input type="submit" value="Change Password">
+    </label>
+    <input type="hidden" name="account_id"
+    <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+    <% } %>>
+</form>
+
+<script src="/js/script.js"></script>

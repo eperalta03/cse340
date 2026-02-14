@@ -308,6 +308,7 @@ input[type= "email"], input[type="text"], input[type="password"], input[type="nu
   border-radius: 6px;
   padding: .5rem;
   width: 90%;
+  border: 1px solid black;
 }
 
 input[type="text"]:valid, input[type="email"]:valid, input[type="password"]:valid, input[type="number"]:valid, select:valid, textarea:valid{
@@ -405,3 +406,38 @@ td{
 td a{
   margin: 0 10px;
 }
+
+#accountM{
+  padding: 1rem 2rem;
+  font-family: 'Arial Narrow Bold', sans-serif;
+}
+
+#accountM h2, #accountM h3{
+  font-family: Verdana, sans-serif;
+  margin: 15px 0;
+}
+
+#accountM p, #accountM a{
+  margin: 10px 0;
+}
+
+h3 {
+  background-color: white;
+  font-family: Verdana, sans-serif;
+  padding: 0 2rem;
+}
+
+.update input[type="submit"]{
+  background-color: #0d3b66;
+  color: white;
+}
+
+.update #pswdBtn {
+  margin-left: 15px;
+}
+
+.update span{
+  color: black;
+  width: 60%;
+}
+

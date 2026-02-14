@@ -122,6 +122,7 @@ Util.checkJWTToken = (req, res, next) => {
     next()
    })
  } else {
+  res.locals.loggedin = false
   next()
  }
 }
@@ -137,7 +138,40 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
- 
+
+
+/* ****************************************
+*  Check Login and Account Type
+**************************************** */
+Util.checkAccountType = (req, res, next) => {
+  try {
+    const token = req.cookies.jwt
+
+    if (!token) {
+      req.flash("notice", "Please log in.")
+      return res.redirect("/account/login")
+    }
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+
+    if (
+      decoded.account_type === "Employee" ||
+      decoded.account_type === "Admin"
+    ) {
+      res.locals.accountData = decoded
+      return next()
+    }
+
+    req.flash("notice", "You do not have permission to access this area.")
+    return res.redirect("/account/login")
+
+  } catch (error) {
+    req.flash("notice", "Session expired. Please log in again.")
+    return res.redirect("/account/login")
+  }
+}
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
