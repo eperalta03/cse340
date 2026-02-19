@@ -2,4 +2,50 @@
   <h1><%= title %></h1>
 <% } %>
 
+<%- messages() %>
+
+
+
 <%- item %>
+
+<section class="review-summary">
+  <h2>Reviews</h2>
+
+  <% if (stats && stats.review_count > 0) { %>
+    <p>
+      Rate: <strong><%= Number(stats.average_rating).toFixed(1) %></strong>
+      (<%= stats.review_count %> review(s))
+    </p>
+  <% } else { %>
+    <p>There are no reviews yet.</p>
+  <% } %>
+
+  <% if (locals.accountData) { %>
+
+      <% if (hasReviewed) { %>
+          <p>You have already left a review for this vehicle.</p>
+      <% } else { %>
+          <a href="/review/new-review/<%= inv_id %>">Add review</a>
+      <% } %>
+
+  <% } else { %>
+      <p><a href="/account/login">Log in</a> to leave a review.</p>
+  <% } %>
+
+  <div id="review">
+
+    <% if (reviews && reviews.length > 0) { %>
+  
+      <% reviews.forEach(function(review) { %>
+        <div class="review-card">
+          <p>⭐ <strong><%= review.review_rating %>/5</strong></p>
+          <p><%= review.review_text %></p>
+          <hr>
+        </div>
+      <% }) %>
+  
+    <% } %>
+  </div>
+
+
+</section>

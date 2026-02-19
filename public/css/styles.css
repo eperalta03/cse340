@@ -441,3 +441,48 @@ h3 {
   width: 60%;
 }
 
+/*--- STARS RATING ---*/
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating input:checked ~ label {
+  color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: gold;
+}
+
+.review-summary {
+  background-color: white;
+  padding: 1rem 2rem;
+   font-family: 'Arial Narrow Bold', sans-serif;
+}
+
+.review-summary h2 {
+  font-family: Verdana, sans-serif;
+  margin-bottom: 15px;
+}
+
+.review-summary p, a {
+  margin: 10px;
+}
+
+#review {
+  margin-top: 15px;
+}
+
+

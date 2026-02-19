@@ -1,0 +1,45 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<form id="add-review" action="/review/new-review" method="post">
+    <fieldset>
+      <label>
+        Review
+      </label>
+        <textarea name="review_text" rows="5" required><%= review_text ? review_text : "" %></textarea>
+      <label>
+        Overall Rating
+      </label>
+        <div class="star-rating">
+            <input type="radio" name="review_rating" value="5" id="star5" required>
+            <label for="star5">★</label>
+
+            <input type="radio" name="review_rating" value="4" id="star4">
+            <label for="star4">★</label>
+
+            <input type="radio" name="review_rating" value="3" id="star3">
+            <label for="star3">★</label>
+
+            <input type="radio" name="review_rating" value="2" id="star2">
+            <label for="star2">★</label>
+
+            <input type="radio" name="review_rating" value="1" id="star1">
+            <label for="star1">★</label>
+        </div>
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+        <label>
+          <input type="submit" value="Post Review">
+        </label>
+    </fieldset>
+</form>

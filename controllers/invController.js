@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const reviewModel = require("../models/review-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -37,10 +38,28 @@ invCont.buildByItemId = async function (req, res, next) {
     const item = await utilities.buildItemGrid(data)
     const nav = await utilities.getNav()
 
+    const reviews = await reviewModel.getReviewsByVehicle(item_id)
+    const stats = await reviewModel.getReviewStats(item_id)
+
+    let userReview = null
+    let hasReviewed = false
+
+    if (res.locals.accountData) {
+      const account_id = res.locals.accountData.account_id
+      userReview = await reviewModel.getReviewByAccountAndVehicle(item_id, account_id)
+      hasReviewed = !!userReview
+    }
+
+
     res.render("./inventory/item", {
       title: `${data.inv_year} ${data.inv_make} ${data.inv_model}`,
       nav,
       item,
+      reviews,
+      stats,
+      hasReviewed,
+      userReview,
+      inv_id: item_id,
     })
   } catch (error) {
     next(error)
